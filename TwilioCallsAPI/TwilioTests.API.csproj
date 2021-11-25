@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>dfe8d389-b90e-419e-b4fa-81a22bdb0f19</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Twilio" Version="5.68.1" />
+		<PackageReference Include="Twilio.AspNet.Common" Version="5.68.3" />
+	</ItemGroup>
+
+</Project>
