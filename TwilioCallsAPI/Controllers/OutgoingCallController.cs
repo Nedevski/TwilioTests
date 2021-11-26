@@ -36,7 +36,8 @@ public class OutgoingCallController : TwilioController
         var call = CallResource.Create(
             twiml: new Twiml(voice.ToString()),
             from: new PhoneNumber(_numbersConfig.USSender),
-            to: new PhoneNumber(_numbersConfig.BGNikola)
+            to: new PhoneNumber(_numbersConfig.BGNikola),
+            record: true
         );
 
         return Ok(call.Sid);
