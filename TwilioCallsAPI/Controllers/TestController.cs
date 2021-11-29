@@ -12,6 +12,7 @@ namespace TwilioTests.API.Controllers;
 public class TestController : TwilioController
 {
     private const string TEST_CALL = "TestCall";
+    private const string ROUTING_CALL = "RoutingCall";
 
     private readonly NumbersConfiguration _numbersConfig;
 
@@ -33,6 +34,26 @@ public class TestController : TwilioController
             .Play(Media("f3fe3e3d9f854b68a1007eafe85a5189.mp3"))
             // long gather to record the call after the message has been played
             .Gather(timeout: 10, numDigits: 10);
+
+        var call = CallResource.Create(
+            twiml: new Twiml(voice.ToString()),
+            from: new PhoneNumber(_numbersConfig.DefaultSender),
+            to: new PhoneNumber(phoneNumber),
+            record: true
+        );
+
+        return Ok(call.Sid);
+    }
+
+    [HttpPost]
+    [Route(ROUTING_CALL)]
+    public IActionResult OutgoingCallWithRouting(string phoneNumber = null)
+    {
+        if (phoneNumber is null) phoneNumber = _numbersConfig.BGNikola;
+
+        var voice = new VoiceResponse()
+            .Say("Hello!")
+            .Dial(_numbersConfig.BGNikola);
 
         var call = CallResource.Create(
             twiml: new Twiml(voice.ToString()),
