@@ -40,6 +40,16 @@ public class TwilioController : ControllerBase
         return Action(filename, "Media");
     }
 
+    protected Uri Number(int number)
+    {
+        // This is a hack to prevent Twilio from caching the audio when
+        // it's played multiple times in a row. If you don't do this then
+        // when playing "0000" the first two zeros will be played slowly,
+        // and the second two will be played much faster resulting in a 
+        // very choppy flow.
+        return Media($"Numbers/{number}.mp3?nocache={Guid.NewGuid()}");
+    }
+
     protected Gather Gather(int numDigits, string action, string controller = null)
     {
         return new Gather(
