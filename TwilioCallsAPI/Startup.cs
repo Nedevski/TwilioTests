@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 
 using TwilioTests.API.Configuration;
@@ -35,11 +36,13 @@ public class Startup
         }
 
         app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "x v1"));
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Twilio Call API v1"));
 
         app.UseHttpsRedirection();
 
         app.UseRouting();
+
+        app.UseStaticFiles();
 
         app.UseAuthorization();
 

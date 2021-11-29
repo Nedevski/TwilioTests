@@ -9,14 +9,13 @@ using TwilioTests.API.Helpers;
 
 namespace TwilioTests.API.Controllers;
 
-public class OutgoingCallController : TwilioController
+public class TestController : TwilioController
 {
-    private const string START_CALL = "StartCall";
-    private const string CONTINUED = "Continued";
+    private const string TEST_CALL = "TestCall";
 
     private readonly NumbersConfiguration _numbersConfig;
 
-    public OutgoingCallController(
+    public TestController(
         ILogger<OutgoingCallController> logger,
         IOptions<TwilioConfiguration> twilioConfiguration,
         IOptions<NumbersConfiguration> numbersConfiguration) : base(logger, twilioConfiguration)
@@ -25,13 +24,18 @@ public class OutgoingCallController : TwilioController
     }
 
     [HttpPost]
-    [Route(START_CALL)]
-    public IActionResult TestCall()
+    [Route(TEST_CALL)]
+    public IActionResult TestCall(string phoneNumber = null)
     {
-        var gatherInput = new Gather(numDigits: 1, action: Action(CONTINUED))
-            .Say("Hello. To continue press a number between 1 and 10");
+        if (phoneNumber is null)
+        {
+            phoneNumber = _numbersConfig.BGNikola;
+        }
 
-        var voice = new VoiceResponse().Append(gatherInput);
+        var voice = new VoiceResponse()
+            .Play(Media("f3fe3e3d9f854b68a1007eafe85a5189.mp3"))
+            // long gather to record the call after the message has been played
+            .Gather(timeout: 10, numDigits: 10);
 
         var call = CallResource.Create(
             twiml: new Twiml(voice.ToString()),
@@ -41,16 +45,5 @@ public class OutgoingCallController : TwilioController
         );
 
         return Ok(call.Sid);
-    }
-
-    [HttpPost]
-    [Route(CONTINUED)]
-    public IActionResult OrderRecording([FromForm] VoiceRequest request)
-    {
-        var response = new VoiceResponse()
-            .Say($"You pressed the number {request.Digits}")
-            .Hangup();
-
-        return response.AsTwiML();
     }
 }

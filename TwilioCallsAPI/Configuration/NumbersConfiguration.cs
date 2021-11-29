@@ -2,7 +2,7 @@
 
 public class NumbersConfiguration
 {
-    public string USSender { get; set; }
+    public string DefaultSender { get; set; }
 
     public string BGNikola { get; set; }
 

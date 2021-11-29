@@ -35,6 +35,11 @@ public class TwilioController : ControllerBase
         return new Uri(path);
     }
 
+    protected Uri Media(string filename)
+    {
+        return Action(filename, "Media");
+    }
+
     protected Gather Gather(int numDigits, string action, string controller = null)
     {
         return new Gather(

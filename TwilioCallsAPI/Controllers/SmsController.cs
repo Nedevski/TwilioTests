@@ -32,7 +32,7 @@ public class SmsController : TwilioController
 
         var message = MessageResource.Create(
             body: request.Body,
-            from: new PhoneNumber(_numbersConfig.USSender),
+            from: new PhoneNumber(_numbersConfig.DefaultSender),
             to: receiver
         );
 
