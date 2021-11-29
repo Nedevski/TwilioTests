@@ -27,10 +27,7 @@ public class TestController : TwilioController
     [Route(TEST_CALL)]
     public IActionResult TestCall(string phoneNumber = null)
     {
-        if (phoneNumber is null)
-        {
-            phoneNumber = _numbersConfig.BGNikola;
-        }
+        if (phoneNumber is null) phoneNumber = _numbersConfig.BGNikola;
 
         var voice = new VoiceResponse()
             .Play(Media("f3fe3e3d9f854b68a1007eafe85a5189.mp3"))
@@ -40,7 +37,7 @@ public class TestController : TwilioController
         var call = CallResource.Create(
             twiml: new Twiml(voice.ToString()),
             from: new PhoneNumber(_numbersConfig.DefaultSender),
-            to: new PhoneNumber(_numbersConfig.BGNikola),
+            to: new PhoneNumber(phoneNumber),
             record: true
         );
 

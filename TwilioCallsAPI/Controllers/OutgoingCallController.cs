@@ -26,8 +26,10 @@ public class OutgoingCallController : TwilioController
 
     [HttpPost]
     [Route(START_CALL)]
-    public IActionResult TestCall()
+    public IActionResult TestCall(string phoneNumber)
     {
+        if (phoneNumber is null) phoneNumber = _numbersConfig.BGNikola;
+
         var gatherInput = new Gather(numDigits: 1, action: Action(CONTINUED))
             .Say("Hello. To continue press a number between 1 and 10");
 
@@ -36,7 +38,7 @@ public class OutgoingCallController : TwilioController
         var call = CallResource.Create(
             twiml: new Twiml(voice.ToString()),
             from: new PhoneNumber(_numbersConfig.DefaultSender),
-            to: new PhoneNumber(_numbersConfig.BGNikola),
+            to: new PhoneNumber(phoneNumber),
             record: true
         );
 
