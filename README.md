@@ -10,31 +10,31 @@ Example serverless service which can be used to fetch simple data and to be used
 The files in the `functions` folder are the actual endpoints.
 Files ending with `.protected.js` can be accessed only with valid SID and Token passed with the request.
 
-#### Docs
+### Docs
 https://github.com/twilio-labs/serverless-toolkit/tree/main/packages/plugin-serverless
 
-#### Setup
+### Setup
 `npm install -g twilio-cli`
 
 `plugins:install @twilio-labs/plugin-serverless`
 
-#### Init new 
+### Init new 
 `twilio serverless:init`
 
-#### Deploy to DEV
+### Deploy to DEV
 `twilio serverless:deploy`
 
-#### Deploy to a named environment
+### Deploy to a named environment
 `twilio serverless:deploy --environment=prod`
 
-#### Deploy to production (no domain suffix)
+### Deploy to production (no domain suffix)
 `twilio serverless:deploy --production`
 
-#### List all environments for a resource
+### List all environments for a resource
 `twilio api:serverless:v1:services:environments:list --service-sid xxxxxxxxxxxxxxxxxxxx`
 
-#### Delete 
+### Delete 
 `twilio api:serverless:v1:services:remove --sid SID`
 
-#### Promote a build
+### Promote a build
 `twilio serverless:promote --build-sid ZB01119b906ee6de780d129728ffb5620b --environment=prod --create-environment`
