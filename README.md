@@ -4,7 +4,7 @@ A simple .NET 6 project that tests Twilio's Voice and SMS APIs, using Twilio .NE
 There are an incoming and outgoing call controllers with simple flows - user input, audio playback, recording of part of the call, etc.
 There is also the SMS logic, which is not that complicated anyway.
 
-Register with [this link](www.twilio.com/referral/UYpnZT) to get bonus $10 when you upgrade your account.
+**Register in Twilio with [this link](www.twilio.com/referral/UYpnZT) to get bonus $10 when you upgrade your account.**
 
 # TwilioServerless
 Example serverless service which can be used to fetch simple data and to be used in the builder
